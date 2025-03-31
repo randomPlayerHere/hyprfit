@@ -33,9 +33,9 @@ export default function Signup() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-gray-100 to-gray-200 text-gray-900 flex flex-col justify-center">
-      <div className="max-w-lg mx-auto px-12 py-16 bg-white rounded-xl shadow-lg">
+      <div className="max-w-lg mx-auto px-18 py-18 bg-white rounded-xl shadow-lg">
         <div className="flex justify-center mb-10">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-4">
             <Image
               src="/greek-helmet.png"
               alt="Greek Helmet"
@@ -119,7 +119,7 @@ export default function Signup() {
 
       <footer className="max-w-lg mx-auto p-6 mt-12 text-center">
         <div className="text-sm text-gray-500">
-          © {new Date().getFullYear()} Temple of Gains
+          © {new Date().getFullYear()} HyprFit 
         </div>
       </footer>
     </div>

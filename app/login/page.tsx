@@ -31,7 +31,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-gray-100 to-gray-200 text-gray-900 flex flex-col justify-center">
-      <div className="max-w-lg mx-auto px-18 py-18 bg-white rounded-xl shadow-md">
+      <div className="w-[500px] mx-auto px-18 py-18 bg-white rounded-xl shadow-md">
         <div className="flex justify-center mb-10">
           <div className="flex items-center gap-4">
             <Image
@@ -45,7 +45,7 @@ export default function Login() {
           </div>
         </div>
 
-        <h1 className="text-2xl font-bold mb-6 text-center">Welcome Back</h1>
+        <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
         
         {error && (
           <div className="bg-red-50 text-red-600 p-3 rounded-lg mb-6 text-sm">
@@ -121,7 +121,7 @@ export default function Login() {
 
       <footer className="max-w-md mx-auto p-6 mt-8 text-center">
         <div className="text-sm text-gray-500">
-          © {new Date().getFullYear()} Temple of Gains
+          © {new Date().getFullYear()} HyprFit
         </div>
       </footer>
     </div>
