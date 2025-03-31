@@ -62,7 +62,7 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
-              href="/dashboard"
+              href="/signup"
               className="bg-black text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-800 transition-colors text-center shadow-lg"
             >
               Begin Your Trial
