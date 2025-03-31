@@ -19,7 +19,7 @@ export default function Home() {
             className="h-8 w-8"
           />
           <span className="text-2xl font-bold tracking-tighter bg-gradient-to-r from-black to-gray-700 bg-clip-text text-transparent">
-            HYPRFIT©
+            HYPRFIT ©
           </span>
         </div>
 
@@ -52,7 +52,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <main className="max-w-7xl mx-auto px-6 py-20 md:py-32 flex flex-col md:flex-row items-center gap-16">
+      <main className="max-w-7xl mx-auto px-6 py-10 md:py-16 flex flex-col md:flex-row items-center gap-14">
         <div className="md:w-1/2">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight bg-gradient-to-r from-black to-gray-700 bg-clip-text text-transparent">
             FORGE YOUR <span className="bg-gradient-to-r from-gray-700 to-black bg-clip-text text-transparent">SPARTAN</span> PHYSIQUE
@@ -69,7 +69,7 @@ export default function Home() {
             </Link>
             <Link
               href="#"
-              className="border-2 border-black px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-100 transition-colors text-center"
+              className="border-2 border-black px-8 py-4 rounded-full text-lg font-medium hover:bg-[#fff] transition-colors text-center"
             >
               See Transformations
             </Link>
@@ -91,11 +91,11 @@ export default function Home() {
 
       </main>
 
-      <footer className="bg-[#222] border-t border-gray-200 py-12 px-6 text-white">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+      <footer className="bg-[#222] border-t border-gray-200 py-12 px-6 text-white flex flex-col">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 w-full">
           {/* Column 1 */}
           <div>
-            <h3 className="text-xl font-bold mb-4 tracking-tighter">COMPANY</h3>
+            <h3 className="text-2xl font-bold mb-4 tracking-tighter">COMPANY</h3>
             <ul className="space-y-3">
               <li><Link href="#">About Us</Link></li>
               <li><Link href="#">Careers</Link></li>
@@ -105,7 +105,7 @@ export default function Home() {
 
           {/* Column 2 */}
           <div>
-            <h3 className="text-xl font-bold mb-4 tracking-tighter">PRODUCTS</h3>
+            <h3 className="text-2xl font-bold mb-4 tracking-tighter">PRODUCTS</h3>
             <ul className="space-y-3">
               <li><Link href="#">Workouts</Link></li>
               <li><Link href="#">Nutrition</Link></li>
@@ -115,7 +115,7 @@ export default function Home() {
 
           {/* Column 3 */}
           <div>
-            <h3 className="text-xl font-bold mb-4 tracking-tighter">SUPPORT</h3>
+            <h3 className="text-2xl font-bold mb-4 tracking-tighter">SUPPORT</h3>
             <ul className="space-y-3">
               <li><Link href="#">Privacy Policy</Link></li>
               <li><Link href="#">Terms</Link></li>
@@ -124,25 +124,28 @@ export default function Home() {
 
           {/* Column 4 */}
           <div>
-            <h3 className="text-xl font-bold mb-4 tracking-tighter">MY ACCOUNT</h3>
+            <h3 className="text-2xl font-bold mb-4 tracking-tighter">MY ACCOUNT</h3>
             <div className="space-y-4">
               <Link href="#" className="block hover:text-gray-300 transition">Log In/Register</Link>
               <Link href="#" className="block hover:text-gray-300 transition">Contact Us</Link>
-              <div className="pt-6 flex items-center gap-2">
-                <Image
-                  src="/greek-helmet-white.png"
-                  alt="Greek Helmet"
-                  width={24}
-                  height={24}
-                  className="h-6 w-6"
-                />
-                <span className="font-bold text-lg">HYPRFIT ©</span>
-              </div>
             </div>
           </div>
         </div>
-      </footer>
-      
+
+        {/* Bottom-right company name and logo */}
+        <div className="w-full flex justify-end items-end pt-12">
+          <div className="flex items-center gap-2">
+            <Image
+              src="/greek-helmet-white.png"
+              alt="Greek Helmet"
+              width={24}
+              height={24}
+              className="h-6 w-6"
+            />
+            <span className="font-bold text-lg">HYPRFIT ©</span>
+          </div>
+        </div>
+      </footer>      
     </div>
   );
 }
