@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 
 export default function Home() {
   // State for workouts
@@ -257,69 +258,40 @@ export default function Home() {
           </button>
         </div>
 
-        {/* Progress Graph */}
-        <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-md">
+        {/* Progress Graph */}       
+        <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-md overflow-x-auto">
           <h2 className="text-2xl font-bold mb-4 border-b border-gray-200 pb-2">Workout Progress</h2>
-          <div className="h-64">
-            <div className="flex items-end h-48 gap-4 mt-8 border-b border-l border-gray-200">
-              {workoutProgress.map((month, index) => (
-                <div key={index} className="flex-1 flex gap-1 items-end">
-                  <div
-                    className="w-full bg-gray-800"
-                    style={{ height: `${month.strength}%` }}
-                  ></div>
-                  <div
-                    className="w-full bg-gray-400"
-                    style={{ height: `${month.endurance}%` }}
-                  ></div>
-                </div>
-              ))}
-            </div>
-            <div className="flex justify-between mt-2">
-              {workoutProgress.map((month, index) => (
-                <div key={index} className="flex-1 text-center text-sm text-gray-600">
-                  {month.month}
-                </div>
-              ))}
-            </div>
-            <div className="flex gap-4 mt-4 justify-center">
-              <div className="flex items-center">
-                <div className="w-3 h-3 bg-gray-800 mr-2"></div>
-                <span className="text-sm">Strength</span>
-              </div>
-              <div className="flex items-center">
-                <div className="w-3 h-3 bg-gray-400 mr-2"></div>
-                <span className="text-sm">Endurance</span>
-              </div>
-            </div>
+          <div className="h-64 w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={workoutProgress} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                <XAxis dataKey="month" />
+                <YAxis />
+                <Tooltip />
+                <Bar dataKey="strength" fill="#4B5563" name="Strength" />
+                <Bar dataKey="endurance" fill="#9CA3AF" name="Endurance" />
+              </BarChart>
+            </ResponsiveContainer>
           </div>
         </div>
 
         {/* To-Do Workouts */}
         <div className="bg-white p-6 rounded-xl shadow-md">
-          <h2 className="text-2xl font-bold mb-4 border-b border-gray-200 pb-2">
-            To-Do Workouts
-          </h2>
-
-          {todoWorkouts.length > 0 ? (
-            <div className="space-y-3">
-              {todoWorkouts.map((workout, index) => (
-                <div key={workout.id || index} className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={workout.completed}
-                    onChange={() => toggleTodoCompletion(workout.id)}
-                    className="mr-3 h-5 w-5 rounded border-gray-300 accent-black focus:ring-2 focus:ring-black"
-                  />
-                  <span className={`${workout.completed ? "line-through text-gray-400" : "text-gray-900"}`}>
-                    {workout.name}
-                  </span>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p className="text-gray-500 text-sm mt-2">No workouts yet.</p>
-          )}
+          <h2 className="text-2xl font-bold mb-4 border-b border-gray-200 pb-2">To-Do Workouts</h2>
+          <div className="space-y-3">
+            {todoWorkouts.map((workout) => (
+              <div key={workout.id} className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={workout.completed}
+                  onChange={() => toggleTodoCompletion(workout.id)}
+                  className="mr-3 h-5 w-5 rounded border-gray-300 accent-black focus:ring-black"
+                />
+                <span className={workout.completed ? "line-through text-gray-400" : ""}>
+                  {workout.name}
+                </span>
+              </div>
+            ))}
+          </div>
 
           {showAddForm ? (
             <div className="mt-4">
