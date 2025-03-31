@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function Signup() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -14,13 +15,13 @@ export default function Signup() {
     e.preventDefault();
     setIsLoading(true);
     setError("");
-    
+
     if (password !== confirmPassword) {
       setError("Passwords do not match.");
       setIsLoading(false);
       return;
     }
-    
+
     try {
       await new Promise(resolve => setTimeout(resolve, 1500));
       window.location.href = "/dashboard";
@@ -32,31 +33,37 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-gray-100 to-gray-200 text-gray-900 flex flex-col justify-center">
-      <div className="max-w-lg mx-auto px-12 py-16 bg-white rounded-xl shadow-lg">
+    <div className="min-h-screen bg-gradient-to-br from-white via-gray-100 to-gray-200 text-gray-900 flex flex-col justify-center items-center relative py-20">
+      <div className="w-[520px] bg-white px-12 py-16 rounded-xl shadow-md">
         <div className="flex justify-center mb-10">
-          <div className="flex items-center gap-2">
-            <Image
-              src="/greek-helmet.png"
-              alt="Greek Helmet"
-              width={42}
-              height={42}
-              className="h-10 w-10"
-            />
-            <span className="font-bold text-4xl">HYPRFIT</span>
+          <div className="flex items-center gap-4">
+            <Image src="/greek-helmet.png" alt="Greek Helmet" width={36} height={36} className="h-9 w-9" />
+            <span className="font-bold text-3xl">HYPRFIT</span>
           </div>
         </div>
 
-        <h1 className="text-3xl font-bold mb-8 text-center">Create Account</h1>
-        
         {error && (
-          <div className="bg-red-50 text-red-600 p-4 rounded-lg mb-6 text-sm">
+          <div className="bg-red-50 text-red-600 p-3 rounded-lg mb-6 text-sm">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label htmlFor="name" className="block text-sm font-medium mb-1">
+              Name
+            </label>
+            <input
+              id="name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-black"
+              required
+            />
+          </div>
+
+          <div className="mb-4">
             <label htmlFor="email" className="block text-sm font-medium mb-1">
               Email
             </label>
@@ -65,12 +72,12 @@ export default function Signup() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+              className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-black"
               required
             />
           </div>
 
-          <div>
+          <div className="mb-4">
             <label htmlFor="password" className="block text-sm font-medium mb-1">
               Password
             </label>
@@ -79,12 +86,12 @@ export default function Signup() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+              className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-black"
               required
             />
           </div>
 
-          <div>
+          <div className="mb-6">
             <label htmlFor="confirmPassword" className="block text-sm font-medium mb-1">
               Confirm Password
             </label>
@@ -93,7 +100,7 @@ export default function Signup() {
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+              className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-black"
               required
             />
           </div>
@@ -101,26 +108,24 @@ export default function Signup() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-black text-white py-3 rounded-lg text-lg font-medium hover:bg-gray-800 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+            className="w-full bg-black text-white py-2 rounded-lg font-medium hover:bg-gray-800 transition-colors cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
           >
             {isLoading ? "Creating account..." : "Sign up"}
           </button>
         </form>
 
-        <div className="mt-10 text-center">
+        <div className="mt-8 text-center">
           <p className="text-sm text-gray-600">
             Already have an account?{" "}
-            <Link href="/login" className="text-black font-medium hover:underline">
+            <Link href="/login" className="text-black font-medium hover:underline cursor-pointer">
               Sign in
             </Link>
           </p>
         </div>
       </div>
 
-      <footer className="max-w-lg mx-auto p-6 mt-12 text-center">
-        <div className="text-sm text-gray-500">
-          © {new Date().getFullYear()} Temple of Gains
-        </div>
+      <footer className="absolute bottom-4 text-sm text-gray-500">
+        © {new Date().getFullYear()} HyprFit
       </footer>
     </div>
   );

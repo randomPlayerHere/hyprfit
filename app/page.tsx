@@ -24,7 +24,7 @@ export default function Home() {
         </div>
 
         <div className="hidden md:flex gap-8 items-center">
-          <div className="relative">
+          {/* <div className="relative">
             <input
               type="text"
               placeholder="Search workouts..."
@@ -38,7 +38,7 @@ export default function Home() {
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
-          </div>
+          </div> */}
           <Link href="#" className="hover:text-black font-medium transition-colors">Community</Link>
           <Link href="#" className="hover:text-black font-medium transition-colors">Pricing</Link>
           <Link href="#" className="hover:text-black font-medium transition-colors">Contact</Link>
@@ -126,7 +126,7 @@ export default function Home() {
           <div>
             <h3 className="text-2xl font-bold mb-4 tracking-tighter">MY ACCOUNT</h3>
             <div className="space-y-4">
-              <Link href="#" className="block hover:text-gray-300 transition">Log In/Register</Link>
+              <Link href="#" className="block hover:text-gray-300 transition">Log In</Link>
               <Link href="#" className="block hover:text-gray-300 transition">Contact Us</Link>
             </div>
           </div>
