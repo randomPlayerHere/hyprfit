@@ -1,102 +1,289 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  // Dashboard data
+  const currentWorkouts = [
+    { name: "Spartan Strength Circuit", duration: "45 min", completed: false },
+    { name: "Olympian Cardio Blast", duration: "30 min", completed: true },
+    { name: "Athena Core Challenge", duration: "20 min", completed: false },
+  ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+  const dailyChallenge = {
+    name: "300 Spartan Pushups",
+    progress: 45,
+    target: 300,
+  };
+
+  const workoutProgress = [
+    { month: "Jan", strength: 65, endurance: 45 },
+    { month: "Feb", strength: 70, endurance: 50 },
+    { month: "Mar", strength: 80, endurance: 65 },
+    { month: "Apr", strength: 85, endurance: 70 },
+  ];
+
+  // Monthly calendar data
+  const monthName = "March 2023";
+  const daysInMonth = 31;
+  const startDay = 3; // Wednesday (0 = Sunday)
+  const workoutDays = [2, 3, 7, 8, 9, 14, 16, 21, 23, 28, 30];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-white via-gray-100 to-gray-200 text-gray-900">
+      {/* Navigation */}
+      <nav className="flex justify-between items-center p-6 max-w-7xl mx-auto">
+        <div className="flex items-center gap-2">
+          <Image 
+            src="/greek-helmet.png"
+            alt="Greek Helmet"
+            width={32}
+            height={32}
+            className="h-8 w-8"
+          />
+          <span className="text-2xl font-bold tracking-tighter bg-gradient-to-r from-black to-gray-700 bg-clip-text text-transparent">
+            HYPRFIT
+          </span>
+        </div>
+        
+        <div className="hidden md:flex gap-8 items-center">
+          <div className="relative">
+            <input 
+              type="text" 
+              placeholder="Search workouts..." 
+              className="bg-white border border-gray-300 rounded-full px-4 py-2 pl-10 w-64 focus:outline-none focus:ring-2 focus:ring-black shadow-sm"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <svg 
+              className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <Link href="#" className="hover:text-black font-medium transition-colors">Community</Link>
+          <Link href="#" className="hover:text-black font-medium transition-colors">Pricing</Link>
+          <Link href="#" className="hover:text-black font-medium transition-colors">Contact</Link>
+          <Link 
+            href="#" 
+            className="bg-black text-white px-4 py-2 rounded-full hover:bg-gray-800 transition-colors font-medium shadow-md"
           >
-            Read our docs
-          </a>
+            Join Us
+          </Link>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <main className="max-w-7xl mx-auto px-6 py-20 md:py-32 flex flex-col md:flex-row items-center gap-16">
+        <div className="md:w-1/2">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight bg-gradient-to-r from-black to-gray-700 bg-clip-text text-transparent">
+            FORGE YOUR <span className="bg-gradient-to-r from-gray-700 to-black bg-clip-text text-transparent">SPARTAN</span> PHYSIQUE
+          </h1>
+          <p className="text-xl text-gray-600 mb-12">
+            Train like the warriors of old with AI-powered workouts that carve stone from flesh.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Link 
+              href="#" 
+              className="bg-black text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-800 transition-colors text-center shadow-lg"
+            >
+              Begin Your Trial
+            </Link>
+            <Link 
+              href="#" 
+              className="border-2 border-black px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-100 transition-colors text-center"
+            >
+              See Transformations
+            </Link>
+          </div>
+        </div>
+        
+        <div className="md:w-1/2 flex justify-center">
+          <div className="relative w-full max-w-md aspect-square">
+            <Image
+              src="/teen_white.png"
+              alt="Spartan Warrior"
+              width={800}
+              height={800}
+              className="object-cover rounded-lg shadow-xl mix-blend-multiply"
+              priority
+            />
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      {/* Dashboard Section */}
+      <section className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Current Workouts */}
+        <div className="bg-white p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold mb-4 border-b border-gray-200 pb-2">Today's Workouts</h2>
+          <ul className="space-y-4">
+            {currentWorkouts.map((workout, index) => (
+              <li key={index} className="flex items-center justify-between">
+                <div>
+                  <h3 className={`font-medium ${workout.completed ? 'line-through text-gray-400' : 'text-black'}`}>
+                    {workout.name}
+                  </h3>
+                  <p className="text-sm text-gray-500">{workout.duration}</p>
+                </div>
+                <button 
+                  className={`px-3 py-1 rounded-full text-sm font-medium ${workout.completed ? 'bg-gray-200 text-gray-600' : 'bg-black text-white'}`}
+                >
+                  {workout.completed ? 'Completed' : 'Start'}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Monthly Calendar */}
+        <div className="bg-white p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold mb-4 border-b border-gray-200 pb-2">Workout Calendar</h2>
+          <div className="mb-4 flex justify-between items-center">
+            <h3 className="font-medium">{monthName}</h3>
+            <div className="flex gap-2">
+              <button className="p-1 rounded hover:bg-gray-100">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button className="p-1 rounded hover:bg-gray-100">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div className="grid grid-cols-7 gap-1">
+            {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(day => (
+              <div key={day} className="text-center text-sm font-medium py-1">{day}</div>
+            ))}
+            {Array.from({ length: startDay }).map((_, i) => (
+              <div key={`empty-${i}`} className="h-8"></div>
+            ))}
+            {Array.from({ length: daysInMonth }).map((_, i) => {
+              const day = i + 1;
+              const hasWorkout = workoutDays.includes(day);
+              return (
+                <div 
+                  key={day} 
+                  className={`h-8 flex items-center justify-center rounded-full text-sm 
+                    ${hasWorkout ? 'bg-black text-white' : 'hover:bg-gray-100'}`}
+                >
+                  {day}
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-4 flex items-center justify-center gap-2">
+            <div className="w-3 h-3 bg-black rounded-full"></div>
+            <span className="text-sm">Workout day</span>
+          </div>
+        </div>
+
+        {/* Daily Challenge */}
+        <div className="bg-white p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold mb-4 border-b border-gray-200 pb-2">Daily Challenge</h2>
+          <h3 className="font-medium mb-2">{dailyChallenge.name}</h3>
+          <div className="mb-4">
+            <div className="flex justify-between text-sm mb-1">
+              <span>Progress: {dailyChallenge.progress}/{dailyChallenge.target}</span>
+              <span>{Math.round((dailyChallenge.progress/dailyChallenge.target)*100)}%</span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-2.5">
+              <div 
+                className="bg-black h-2.5 rounded-full" 
+                style={{ width: `${(dailyChallenge.progress/dailyChallenge.target)*100}%` }}
+              ></div>
+            </div>
+          </div>
+          <button className="w-full bg-black text-white py-2 rounded-lg font-medium hover:bg-gray-800 transition-colors">
+            Log Progress
+          </button>
+        </div>
+
+        {/* Progress Graph */}
+        <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold mb-4 border-b border-gray-200 pb-2">Workout Progress</h2>
+          <div className="h-64">
+            <div className="flex items-end h-48 gap-4 mt-8 border-b border-l border-gray-200">
+              {workoutProgress.map((month, index) => (
+                <div key={index} className="flex-1 flex gap-1 items-end">
+                  <div 
+                    className="w-full bg-gray-800" 
+                    style={{ height: `${month.strength}%` }}
+                  ></div>
+                  <div 
+                    className="w-full bg-gray-400" 
+                    style={{ height: `${month.endurance}%` }}
+                  ></div>
+                </div>
+              ))}
+            </div>
+            <div className="flex justify-between mt-2">
+              {workoutProgress.map((month, index) => (
+                <div key={index} className="flex-1 text-center text-sm text-gray-600">
+                  {month.month}
+                </div>
+              ))}
+            </div>
+            <div className="flex gap-4 mt-4 justify-center">
+              <div className="flex items-center">
+                <div className="w-3 h-3 bg-gray-800 mr-2"></div>
+                <span className="text-sm">Strength</span>
+              </div>
+              <div className="flex items-center">
+                <div className="w-3 h-3 bg-gray-400 mr-2"></div>
+                <span className="text-sm">Endurance</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* To-Do Workouts */}
+        <div className="bg-white p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold mb-4 border-b border-gray-200 pb-2">To-Do Workouts</h2>
+          <div className="space-y-3">
+            <div className="flex items-center">
+              <input type="checkbox" className="mr-3 h-5 w-5 rounded border-gray-300 text-black focus:ring-black" />
+              <span>Leg Day: Titan Squats</span>
+            </div>
+            <div className="flex items-center">
+              <input type="checkbox" className="mr-3 h-5 w-5 rounded border-gray-300 text-black focus:ring-black" />
+              <span>Upper Body: Godlike Pullups</span>
+            </div>
+            <div className="flex items-center">
+              <input type="checkbox" className="mr-3 h-5 w-5 rounded border-gray-300 text-black focus:ring-black" />
+              <span>Core: Hades Ab Circuit</span>
+            </div>
+            <div className="flex items-center">
+              <input type="checkbox" className="mr-3 h-5 w-5 rounded border-gray-300 text-black focus:ring-black" />
+              <span>Cardio: Hermes Sprint Intervals</span>
+            </div>
+          </div>
+          <button className="mt-4 w-full border border-gray-300 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+            + Add Workout
+          </button>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="max-w-7xl mx-auto p-6 border-t border-gray-200 mt-12">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <Image 
+              src="/greek-helmet.png" 
+              alt="Greek Helmet"
+              width={24}
+              height={24}
+              className="h-6 w-6"
+            />
+            <span className="font-bold">HYPRFIT</span>
+          </div>
+          <div className="text-sm text-gray-500">
+            © {new Date().getFullYear()} Temple of Gains
+          </div>
+        </div>
       </footer>
     </div>
   );
