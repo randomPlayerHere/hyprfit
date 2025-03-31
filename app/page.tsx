@@ -110,18 +110,19 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="md:w-1/2 flex justify-center">
-          <div className="relative w-full max-w-md aspect-square">
+        <div className="md:w-3/4 flex justify-end">
+          <div className="relative w-full max-w-xl aspect-square">
             <Image
               src="/teen_white.png"
               alt="Spartan Warrior"
-              width={800}
-              height={800}
-              className="object-cover rounded-lg shadow-xl mix-blend-multiply"
+              width={1000}
+              height={1000}
+              className="object-cover rounded-lg mix-blend-multiply"
               priority
             />
           </div>
         </div>
+
       </main>
 
       {/* Dashboard Section */}
