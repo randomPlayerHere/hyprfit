@@ -1,25 +1,35 @@
-'use client';
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+
 export default function Home() {
-  // Dashboard data
-  const currentWorkouts = [
+  // State for workouts
+  const [workouts, setWorkouts] = useState([
     { name: "Spartan Strength Circuit", duration: "45 min", completed: false },
     { name: "Olympian Cardio Blast", duration: "30 min", completed: true },
     { name: "Athena Core Challenge", duration: "20 min", completed: false },
-  ];
+  ]);
 
+  // State for todo workouts
+  const [todoWorkouts, setTodoWorkouts] = useState([
+    { id: 1, name: "Leg Day: Titan Squats", completed: false },
+    { id: 2, name: "Upper Body: Godlike Pullups", completed: false },
+    { id: 3, name: "Core: Hades Ab Circuit", completed: false },
+    { id: 4, name: "Cardio: Hermes Sprint Intervals", completed: false },
+  ]);
+
+  const [newWorkoutName, setNewWorkoutName] = useState("");
+  const [showAddForm, setShowAddForm] = useState(false);
+
+  // Daily Challenge Data
   const dailyChallenge = {
     name: "300 Spartan Pushups",
     progress: 45,
     target: 300,
   };
- const [workouts, setWorkouts] = useState([
-    { name: "Spartan Strength Circuit", duration: "45 min", completed: false },
-    { name: "Olympian Cardio Blast", duration: "30 min", completed: true },
-    { name: "Athena Core Challenge", duration: "20 min", completed: false },
-  ]);
+
+  // Workout Progress Data
   const workoutProgress = [
     { month: "Jan", strength: 65, endurance: 45 },
     { month: "Feb", strength: 70, endurance: 50 },
@@ -27,17 +37,44 @@ export default function Home() {
     { month: "Apr", strength: 85, endurance: 70 },
   ];
 
-  // Monthly calendar data
+  // Calendar Data
   const monthName = "March 2023";
   const daysInMonth = 31;
   const startDay = 3; // Wednesday (0 = Sunday)
   const workoutDays = [2, 3, 7, 8, 9, 14, 16, 21, 23, 28, 30];
- const toggleCompletion = (index: number) => {
+
+  // Toggle workout completion
+  const toggleCompletion = (index: number) => {
     setWorkouts((prevWorkouts) =>
       prevWorkouts.map((workout, i) =>
         i === index ? { ...workout, completed: !workout.completed } : workout
       )
     );
+  };
+
+  // Toggle todo workout completion
+  const toggleTodoCompletion = (id: number) => {
+    setTodoWorkouts((prev) =>
+      prev.map((workout) =>
+        workout.id === id ? { ...workout, completed: !workout.completed } : workout
+      )
+    );
+  };
+
+  // Add new todo workout
+  const addTodoWorkout = () => {
+    if (newWorkoutName.trim()) {
+      setTodoWorkouts((prev) => [
+        ...prev,
+        {
+          id: Date.now(),
+          name: newWorkoutName,
+          completed: false,
+        },
+      ]);
+      setNewWorkoutName("");
+      setShowAddForm(false);
+    }
   };
 
   return (
@@ -126,33 +163,32 @@ export default function Home() {
 
       {/* Dashboard Section */}
       <section className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
-      {/* Current Workouts */}
-      <div className="bg-white p-6 rounded-xl shadow-md">
-        <h2 className="text-2xl font-bold mb-4 border-b border-gray-200 pb-2">
-          Recommended Workouts
-        </h2>
-        <ul className="space-y-4">
-          {workouts.map((workout, index) => (
-            <li key={index} className="flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-2 sm:space-y-0">
-              <div>
-                <h3 className={`font-medium ${workout.completed ? "line-through text-gray-400" : "text-black"}`}>
-                  {workout.name}
-                </h3>
-                <p className="text-sm text-gray-500">{workout.duration}</p>
-              </div>
-              <button
-                onClick={() => toggleCompletion(index)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 hover:opacity-90 
-                  w-full sm:w-auto mt-2 sm:mt-0
-                  ${workout.completed ? "bg-gray-200 text-gray-600" : "bg-black text-white hover:bg-gray-800"}`}
-              >
-                {workout.completed ? "Completed" : "Start"}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-
+        {/* Current Workouts */}
+        <div className="bg-white p-6 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold mb-4 border-b border-gray-200 pb-2">
+            Recommended Workouts
+          </h2>
+          <ul className="space-y-4">
+            {workouts.map((workout, index) => (
+              <li key={index} className="flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-2 sm:space-y-0">
+                <div>
+                  <h3 className={`font-medium ${workout.completed ? "line-through text-gray-400" : "text-black"}`}>
+                    {workout.name}
+                  </h3>
+                  <p className="text-sm text-gray-500">{workout.duration}</p>
+                </div>
+                <button
+                  onClick={() => toggleCompletion(index)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 hover:opacity-90 
+                    w-full sm:w-auto mt-2 sm:mt-0
+                    ${workout.completed ? "bg-gray-200 text-gray-600" : "bg-black text-white hover:bg-gray-800"}`}
+                >
+                  {workout.completed ? "Completed" : "Start"}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
 
         {/* Monthly Calendar */}
         <div className="bg-white p-6 rounded-xl shadow-md">
@@ -262,26 +298,52 @@ export default function Home() {
         <div className="bg-white p-6 rounded-xl shadow-md">
           <h2 className="text-2xl font-bold mb-4 border-b border-gray-200 pb-2">To-Do Workouts</h2>
           <div className="space-y-3">
-            <div className="flex items-center">
-              <input type="checkbox" className="mr-3 h-5 w-5 rounded border-gray-300 text-black focus:ring-black" />
-              <span>Leg Day: Titan Squats</span>
-            </div>
-            <div className="flex items-center">
-              <input type="checkbox" className="mr-3 h-5 w-5 rounded border-gray-300 text-black focus:ring-black" />
-              <span>Upper Body: Godlike Pullups</span>
-            </div>
-            <div className="flex items-center">
-              <input type="checkbox" className="mr-3 h-5 w-5 rounded border-gray-300 text-black focus:ring-black" />
-              <span>Core: Hades Ab Circuit</span>
-            </div>
-            <div className="flex items-center">
-              <input type="checkbox" className="mr-3 h-5 w-5 rounded border-gray-300 text-black focus:ring-black" />
-              <span>Cardio: Hermes Sprint Intervals</span>
-            </div>
+            {todoWorkouts.map((workout) => (
+              <div key={workout.id} className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={workout.completed}
+                  onChange={() => toggleTodoCompletion(workout.id)}
+                  className="mr-3 h-5 w-5 rounded border-gray-300 accent-black focus:ring-black"
+                />
+                <span className={workout.completed ? "line-through text-gray-400" : ""}>
+                  {workout.name}
+                </span>
+              </div>
+            ))}
           </div>
-          <button className="mt-4 w-full border border-gray-300 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
-            + Add Workout
-          </button>
+
+          {showAddForm ? (
+            <div className="mt-4 flex gap-2">
+              <input
+                type="text"
+                value={newWorkoutName}
+                onChange={(e) => setNewWorkoutName(e.target.value)}
+                placeholder="Enter workout name"
+                className="flex-1 border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-black"
+              />
+              <button
+                onClick={addTodoWorkout}
+                className="bg-black text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-800 transition-colors"
+              >
+                Add
+              </button>
+              <button
+                onClick={() => setShowAddForm(false)}
+                className="border border-gray-300 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors"
+              >
+                Cancel
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => setShowAddForm(true)}
+              className="mt-4 w-full border border-gray-300 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors flex items-center justify-center gap-1"
+            >
+              <span>+</span>
+              <span>Add Workout</span>
+            </button>
+          )}
         </div>
       </section>
 
