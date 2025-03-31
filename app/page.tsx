@@ -97,9 +97,9 @@ export default function Home() {
           <div>
             <h3 className="text-2xl font-bold mb-4 tracking-tighter">COMPANY</h3>
             <ul className="space-y-3">
-              <li><Link href="#">About Us</Link></li>
-              <li><Link href="#">Careers</Link></li>
-              <li><Link href="#">Blog</Link></li>
+              <li><Link href="#" className="block hover:text-gray-300 transition">About Us</Link></li>
+              <li><Link href="#" className="block hover:text-gray-300 transition">Careers</Link></li>
+              <li><Link href="#" className="block hover:text-gray-300 transition">Blog</Link></li>
             </ul>
           </div>
 
@@ -107,9 +107,9 @@ export default function Home() {
           <div>
             <h3 className="text-2xl font-bold mb-4 tracking-tighter">PRODUCTS</h3>
             <ul className="space-y-3">
-              <li><Link href="#">Workouts</Link></li>
-              <li><Link href="#">Nutrition</Link></li>
-              <li><Link href="#">Coaching</Link></li>
+              <li><Link href="#" className="block hover:text-gray-300 transition">Workouts</Link></li>
+              <li><Link href="#" className="block hover:text-gray-300 transition">Nutrition</Link></li>
+              <li><Link href="#" className="block hover:text-gray-300 transition">Coaching</Link></li>
             </ul>
           </div>
 
@@ -117,8 +117,8 @@ export default function Home() {
           <div>
             <h3 className="text-2xl font-bold mb-4 tracking-tighter">SUPPORT</h3>
             <ul className="space-y-3">
-              <li><Link href="#">Privacy Policy</Link></li>
-              <li><Link href="#">Terms</Link></li>
+              <li><Link href="#" className="block hover:text-gray-300 transition">Privacy Policy</Link></li>
+              <li><Link href="#" className="block hover:text-gray-300 transition">Terms</Link></li>
             </ul>
           </div>
 
