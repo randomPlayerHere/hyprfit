@@ -30,8 +30,10 @@ export default function Login() {
   };
 
   return (
+
     <div className="min-h-screen bg-gradient-to-br from-white via-gray-100 to-gray-200 text-gray-900 flex flex-col justify-center items-center relative py-20">
       <div className="w-[520px] bg-white px-12 py-16 rounded-xl shadow-md">
+
         <div className="flex justify-center mb-10">
           <div className="flex items-center gap-4">
             <Image src="/greek-helmet.png" alt="Greek Helmet" width={36} height={36} className="h-9 w-9" />
@@ -39,7 +41,9 @@ export default function Login() {
           </div>
         </div>
 
+
         {/* <h1 className="text-2xl font-bold mb-6 text-center">Login</h1> */}
+
 
         {error && (
           <div className="bg-red-50 text-red-600 p-3 rounded-lg mb-6 text-sm">
@@ -82,8 +86,10 @@ export default function Login() {
 
       </div>
 
+
       <footer className="absolute bottom-4 text-sm text-gray-500">
         © {new Date().getFullYear()} HyprFit
+  
       </footer>
     </div>
 
