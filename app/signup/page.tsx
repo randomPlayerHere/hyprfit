@@ -39,6 +39,7 @@ export default function Signup() {
           <div className="flex items-center gap-4">
             <Image src="/greek-helmet.png" alt="Greek Helmet" width={36} height={36} className="h-9 w-9" />
             <span className="font-bold text-3xl">HYPRFIT</span>
+
           </div>
         </div>
 
@@ -124,8 +125,10 @@ export default function Signup() {
         </div>
       </div>
 
+
       <footer className="absolute bottom-4 text-sm text-gray-500">
         © {new Date().getFullYear()} HyprFit
+
       </footer>
     </div>
   );

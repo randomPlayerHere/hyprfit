@@ -43,7 +43,7 @@ export default function Home() {
           <Link href="#" className="hover:text-black font-medium transition-colors">Pricing</Link>
           <Link href="#" className="hover:text-black font-medium transition-colors">Contact</Link>
           <Link
-            href="/login"
+            href="/signup"
             className="bg-black text-white px-4 py-2 rounded-full hover:bg-gray-800 transition-colors font-medium shadow-md"
           >
             Join Us
@@ -126,7 +126,9 @@ export default function Home() {
           <div>
             <h3 className="text-2xl font-bold mb-4 tracking-tighter">MY ACCOUNT</h3>
             <div className="space-y-4">
-              <Link href="#" className="block hover:text-gray-300 transition">Log In</Link>
+
+              <Link href="/login" className="block hover:text-gray-300 transition">Log In</Link>
+
               <Link href="#" className="block hover:text-gray-300 transition">Contact Us</Link>
             </div>
           </div>
