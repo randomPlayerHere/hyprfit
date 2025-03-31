@@ -90,7 +90,7 @@ export default function Home() {
             className="h-8 w-8"
           />
           <span className="text-2xl font-bold tracking-tighter bg-gradient-to-r from-black to-gray-700 bg-clip-text text-transparent">
-            HYPRFIT
+            HYPRFIT©
           </span>
         </div>
 
@@ -297,55 +297,65 @@ export default function Home() {
 
         {/* To-Do Workouts */}
         <div className="bg-white p-6 rounded-xl shadow-md">
-          <h2 className="text-2xl font-bold mb-4 border-b border-gray-200 pb-2">To-Do Workouts</h2>
-          <div className="space-y-3">
-            {todoWorkouts.map((workout) => (
-              <div key={workout.id} className="flex items-center">
-                <input
-                  type="checkbox"
-                  checked={workout.completed}
-                  onChange={() => toggleTodoCompletion(workout.id)}
-                  className="mr-3 h-5 w-5 rounded border-gray-300 accent-black focus:ring-black"
-                />
-                <span className={workout.completed ? "line-through text-gray-400" : ""}>
-                  {workout.name}
-                </span>
-              </div>
-            ))}
-          </div>
+          <h2 className="text-2xl font-bold mb-4 border-b border-gray-200 pb-2">
+            To-Do Workouts
+          </h2>
+
+          {todoWorkouts.length > 0 ? (
+            <div className="space-y-3">
+              {todoWorkouts.map((workout, index) => (
+                <div key={workout.id || index} className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={workout.completed}
+                    onChange={() => toggleTodoCompletion(workout.id)}
+                    className="mr-3 h-5 w-5 rounded border-gray-300 accent-black focus:ring-2 focus:ring-black"
+                  />
+                  <span className={`${workout.completed ? "line-through text-gray-400" : "text-gray-900"}`}>
+                    {workout.name}
+                  </span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-500 text-sm mt-2">No workouts yet.</p>
+          )}
 
           {showAddForm ? (
-            <div className="mt-4 flex gap-2">
+            <div className="mt-4">
               <input
                 type="text"
                 value={newWorkoutName}
                 onChange={(e) => setNewWorkoutName(e.target.value)}
                 placeholder="Enter workout name"
-                className="flex-1 border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-black"
+                className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-black"
               />
-              <button
-                onClick={addTodoWorkout}
-                className="bg-black text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-800 transition-colors"
-              >
-                Add
-              </button>
-              <button
-                onClick={() => setShowAddForm(false)}
-                className="border border-gray-300 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors"
-              >
-                Cancel
-              </button>
+              <div className="flex gap-2 mt-2">
+                <button
+                  onClick={addTodoWorkout}
+                  className="flex-1 bg-black text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-800 transition-colors cursor-pointer"
+                >
+                  Add
+                </button>
+                <button
+                  onClick={() => setShowAddForm(false)}
+                  className="flex-1 border border-gray-300 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors cursor-pointer"
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           ) : (
             <button
               onClick={() => setShowAddForm(true)}
-              className="mt-4 w-full border border-gray-300 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors flex items-center justify-center gap-1"
+              className="mt-4 w-full border border-gray-300 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors flex items-center justify-center gap-1 cursor-pointer"
             >
               <span>+</span>
               <span>Add Workout</span>
             </button>
           )}
         </div>
+
       </section>
 
       {/* Footer */}
@@ -359,10 +369,7 @@ export default function Home() {
               height={24}
               className="h-6 w-6"
             />
-            <span className="font-bold">HYPRFIT</span>
-          </div>
-          <div className="text-sm text-gray-500">
-            © {new Date().getFullYear()} Temple of Gains
+            <span className="font-bold">HYPRFIT ©</span>
           </div>
         </div>
       </footer>
