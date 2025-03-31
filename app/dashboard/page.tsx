@@ -1,10 +1,15 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 
 export default function dashboard() {
+  
+
+  const workoutTypes = ["HIIT", "Strength", "Yoga", "Cardio"];
+  const [currentWorkout, setCurrentWorkout] = useState(workoutTypes[0]);
+
   // State for workouts
   const [workouts, setWorkouts] = useState([
     { name: "Spartan Strength Circuit", duration: "45 min", completed: false },
@@ -84,31 +89,14 @@ export default function dashboard() {
       {/* Dashboard Section */}
       <section className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Current Workouts */}
-        <div className="bg-white p-6 rounded-xl shadow-md">
-          <h2 className="text-2xl font-bold mb-4 border-b border-gray-200 pb-2">
-            Recommended Workouts
-          </h2>
-          <ul className="space-y-4">
-            {workouts.map((workout, index) => (
-              <li key={index} className="flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-2 sm:space-y-0">
-                <div>
-                  <h3 className={`font-medium ${workout.completed ? "line-through text-gray-400" : "text-black"}`}>
-                    {workout.name}
-                  </h3>
-                  <p className="text-sm text-gray-500">{workout.duration}</p>
-                </div>
-                <button
-                  onClick={() => toggleCompletion(index)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 hover:opacity-90 
-                    w-full sm:w-auto mt-2 sm:mt-0
-                    ${workout.completed ? "bg-gray-200 text-gray-600" : "bg-black text-white hover:bg-gray-800"}`}
-                >
-                  {workout.completed ? "Completed" : "Start"}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <div className="justify-center bg-black p-6 rounded-xl flex items-center shadow-lg">
+      {/* Center Circle with Workout Type */}
+      <div className="w-58 h-58 bg-white rounded-full flex items-center justify-center shadow-lg">
+        <span className="text-black text-3xl font-bold uppercase tracking-wider">
+          {currentWorkout}
+        </span>
+      </div>
+    </div>
 
         {/* Monthly Calendar */}
         <div className="bg-white p-6 rounded-xl shadow-md">
