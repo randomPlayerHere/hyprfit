@@ -19,7 +19,7 @@ export default function Home() {
             className="h-8 w-8"
           />
           <span className="text-2xl font-bold tracking-tighter bg-gradient-to-r from-black to-gray-700 bg-clip-text text-transparent">
-            HYPRFIT
+            HYPRFIT©
           </span>
         </div>
 
@@ -91,6 +91,57 @@ export default function Home() {
 
       </main>
 
+      <footer className="bg-[#222] border-t border-gray-200 py-12 px-6 text-white">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+          {/* Column 1 */}
+          <div>
+            <h3 className="text-xl font-bold mb-4 tracking-tighter">COMPANY</h3>
+            <ul className="space-y-3">
+              <li><Link href="#">About Us</Link></li>
+              <li><Link href="#">Careers</Link></li>
+              <li><Link href="#">Blog</Link></li>
+            </ul>
+          </div>
+
+          {/* Column 2 */}
+          <div>
+            <h3 className="text-xl font-bold mb-4 tracking-tighter">PRODUCTS</h3>
+            <ul className="space-y-3">
+              <li><Link href="#">Workouts</Link></li>
+              <li><Link href="#">Nutrition</Link></li>
+              <li><Link href="#">Coaching</Link></li>
+            </ul>
+          </div>
+
+          {/* Column 3 */}
+          <div>
+            <h3 className="text-xl font-bold mb-4 tracking-tighter">SUPPORT</h3>
+            <ul className="space-y-3">
+              <li><Link href="#">Privacy Policy</Link></li>
+              <li><Link href="#">Terms</Link></li>
+            </ul>
+          </div>
+
+          {/* Column 4 */}
+          <div>
+            <h3 className="text-xl font-bold mb-4 tracking-tighter">MY ACCOUNT</h3>
+            <div className="space-y-4">
+              <Link href="#" className="block hover:text-gray-300 transition">Log In/Register</Link>
+              <Link href="#" className="block hover:text-gray-300 transition">Contact Us</Link>
+              <div className="pt-6 flex items-center gap-2">
+                <Image
+                  src="/greek-helmet-white.png"
+                  alt="Greek Helmet"
+                  width={24}
+                  height={24}
+                  className="h-6 w-6"
+                />
+                <span className="font-bold text-lg">HYPRFIT ©</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
       
     </div>
   );
