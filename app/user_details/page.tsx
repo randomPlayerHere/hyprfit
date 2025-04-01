@@ -10,11 +10,31 @@ export default function UserDetails() {
   const [experience, setExperience] = useState("");
   const [sessionDuration, setSessionDuration] = useState("");
 
-  // Function to handle user data instead of API call
-  const handleUserData = (userData: any) => {
-    console.log("User Data Received:", userData);
-    alert("User data processed successfully!");
-    // You can now pass this data to another component or store it in state
+  // Function to handle user data processing (and sending to ML model via API)
+  const handleUserData = async (userData: any) => {
+    try {
+      // Send data to the ML model via an API call
+      const response = await fetch("/api/ml-model", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      // Handle the API response
+      if (response.ok) {
+        const result = await response.json();
+        alert("ML Model Processed Successfully!");
+        console.log("ML Model Response:", result);
+        // You can handle the response data here (e.g., show recommendations, predictions, etc.)
+      } else {
+        throw new Error("Failed to send data to ML model.");
+      }
+    } catch (error) {
+      console.error("Error sending data to ML model:", error);
+      alert("Error processing data with the ML model.");
+    }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -41,7 +61,7 @@ export default function UserDetails() {
       sessionDuration: numSessionDuration 
     };
 
-    // Send data to the function instead of an API
+    // Send data to the ML API
     handleUserData(userData);
   };
 
@@ -73,6 +93,7 @@ export default function UserDetails() {
               <option value="">Select</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
+              <option value="other">Other</option>
             </select>
           </div>
 

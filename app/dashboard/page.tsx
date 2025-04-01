@@ -1,12 +1,10 @@
+
 "use client";
 import Image from "next/image";
-import Link from "next/link";
-import { useState ,useEffect} from "react";
+import { useState, useEffect } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 
-export default function dashboard() {
-  
-
+export default function Dashboard() {
   const workoutTypes = ["HIIT", "Strength", "Yoga", "Cardio"];
   const [currentWorkout, setCurrentWorkout] = useState(workoutTypes[0]);
 
@@ -17,7 +15,7 @@ export default function dashboard() {
     { name: "Athena Core Challenge", duration: "20 min", completed: false },
   ]);
 
-  // State for todo workouts
+  // State for to-do workouts
   const [todoWorkouts, setTodoWorkouts] = useState([
     { id: 1, name: "Leg Day: Titan Squats", completed: false },
     { id: 2, name: "Upper Body: Godlike Pullups", completed: false },
@@ -47,16 +45,7 @@ export default function dashboard() {
   const monthName = "March 2023";
   const daysInMonth = 31;
   const startDay = 3; // Wednesday (0 = Sunday)
-  const workoutDays = [2, 3, 7, 8, 9, 14, 16, 21, 23, 28, 30];
-
-  // Toggle workout completion
-  const toggleCompletion = (index: number) => {
-    setWorkouts((prevWorkouts) =>
-      prevWorkouts.map((workout, i) =>
-        i === index ? { ...workout, completed: !workout.completed } : workout
-      )
-    );
-  };
+  const [workoutDays, setWorkoutDays] = useState([2, 3, 7, 8, 9, 14, 16, 21, 23, 28, 30]);
 
   // Toggle todo workout completion
   const toggleTodoCompletion = (id: number) => {
@@ -83,41 +72,46 @@ export default function dashboard() {
     }
   };
 
+  // Check if all to-do workouts are completed and update the calendar
+  useEffect(() => {
+    if (todoWorkouts.every((workout) => workout.completed)) {
+      const nextAvailableDay = findNextAvailableWorkoutDay();
+      if (nextAvailableDay !== null) {
+        setWorkoutDays((prevDays) => [...prevDays, nextAvailableDay]);
+      }
+    }
+  }, [todoWorkouts]);
+
+  // Find the next available workout day
+  const findNextAvailableWorkoutDay = () => {
+    for (let i = 1; i <= daysInMonth; i++) {
+      if (!workoutDays.includes(i)) {
+        return i;
+      }
+    }
+    return null;
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-gray-100 to-gray-200 text-gray-900">
-
       {/* Dashboard Section */}
       <section className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
         {/* Current Workouts */}
         <div className="justify-center w-80 h-50 bg-black p-6 rounded-full flex items-center shadow-lg">
-      {/* Center Circle with Workout Type */}
-      <div className="w-38 h-18 bg-white rounded-full flex items-center justify-center shadow-lg">
-        <span className="text-black text-3xl font-bold uppercase tracking-wider">
-          {currentWorkout}
-        </span>
-      </div>
-    </div>
+          <div className="w-38 h-18 bg-white rounded-full flex items-center justify-center shadow-lg">
+            <span className="text-black text-3xl font-bold uppercase tracking-wider">
+              {currentWorkout}
+            </span>
+          </div>
+        </div>
 
         {/* Monthly Calendar */}
         <div className="bg-white p-6 rounded-xl shadow-md">
           <h2 className="text-2xl font-bold mb-4 border-b border-gray-200 pb-2">Workout Calendar</h2>
-          <div className="mb-4 flex justify-between items-center">
-            <h3 className="font-medium">{monthName}</h3>
-            <div className="flex gap-2">
-              <button className="p-1 rounded hover:bg-gray-100">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-              <button className="p-1 rounded hover:bg-gray-100">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </div>
-          </div>
+          <h3 className="font-medium">{monthName}</h3>
           <div className="grid grid-cols-7 gap-1">
-            {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(day => (
+            {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((day) => (
               <div key={day} className="text-center text-sm font-medium py-1">{day}</div>
             ))}
             {Array.from({ length: startDay }).map((_, i) => (
@@ -130,7 +124,7 @@ export default function dashboard() {
                 <div
                   key={day}
                   className={`h-8 flex items-center justify-center rounded-full text-sm 
-                    ${hasWorkout ? 'bg-black text-white' : 'hover:bg-gray-100'}`}
+                    ${hasWorkout ? "bg-black text-white" : "hover:bg-gray-100"}`}
                 >
                   {day}
                 </div>
@@ -164,7 +158,7 @@ export default function dashboard() {
           </button>
         </div>
 
-        {/* Progress Graph */}       
+        {/* Progress Graph */}
         <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-md overflow-x-auto">
           <h2 className="text-2xl font-bold mb-4 border-b border-gray-200 pb-2">Workout Progress</h2>
           <div className="h-64 w-full">
@@ -181,15 +175,15 @@ export default function dashboard() {
         </div>
 
         {/* To-Do Workouts */}
-      <div className="bg-white p-6 rounded-xl shadow-md">
+        <div className="bg-white p-6 rounded-xl shadow-md">
           <h2 className="text-2xl font-bold mb-4 border-b border-gray-200 pb-2">
             To-Do Workouts
           </h2>
 
           {todoWorkouts.length > 0 ? (
             <div className="space-y-3">
-              {todoWorkouts.map((workout, index) => (
-                <div key={workout.id || index} className="flex items-center">
+              {todoWorkouts.map((workout) => (
+                <div key={workout.id} className="flex items-center">
                   <input
                     type="checkbox"
                     checked={workout.completed}
@@ -216,50 +210,22 @@ export default function dashboard() {
                 className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-black"
               />
               <div className="flex gap-2 mt-2">
-                <button
-                  onClick={addTodoWorkout}
-                  className="flex-1 bg-black text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-800 transition-colors cursor-pointer"
-                >
+                <button onClick={addTodoWorkout} className="flex-1 bg-black text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-800 transition-colors">
                   Add
                 </button>
-                <button
-                  onClick={() => setShowAddForm(false)}
-                  className="flex-1 border border-gray-300 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors cursor-pointer"
-                >
+                <button onClick={() => setShowAddForm(false)} className="flex-1 border border-gray-300 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
                   Cancel
                 </button>
               </div>
             </div>
           ) : (
-            <button
-              onClick={() => setShowAddForm(true)}
-              className="mt-4 w-full border border-gray-300 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors flex items-center justify-center gap-1 cursor-pointer"
-            >
+            <button onClick={() => setShowAddForm(true)} className="mt-4 w-full border border-gray-300 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors flex items-center justify-center gap-1">
               <span>+</span>
               <span>Add Workout</span>
             </button>
           )}
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="max-w-7xl mx-auto p-6 border-t border-gray-200 mt-12">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <Image
-              src="/greek-helmet.png"
-              alt="Greek Helmet"
-              width={24}
-              height={24}
-              className="h-6 w-6"
-            />
-            <span className="font-bold">HYPRFIT</span>
-          </div>
-          <div className="text-sm text-gray-500">
-            © {new Date().getFullYear()} Temple of Gains
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
