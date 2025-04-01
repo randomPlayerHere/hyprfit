@@ -89,9 +89,9 @@ export default function dashboard() {
       {/* Dashboard Section */}
       <section className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Current Workouts */}
-        <div className="justify-center bg-black p-6 rounded-xl flex items-center shadow-lg">
+        <div className="justify-center w-80 h-50 bg-black p-6 rounded-full flex items-center shadow-lg">
       {/* Center Circle with Workout Type */}
-      <div className="w-58 h-58 bg-white rounded-full flex items-center justify-center shadow-lg">
+      <div className="w-38 h-18 bg-white rounded-full flex items-center justify-center shadow-lg">
         <span className="text-black text-3xl font-bold uppercase tracking-wider">
           {currentWorkout}
         </span>
