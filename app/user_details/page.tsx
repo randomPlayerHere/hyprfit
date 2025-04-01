@@ -10,7 +10,14 @@ export default function UserDetails() {
   const [experience, setExperience] = useState("");
   const [sessionDuration, setSessionDuration] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  // Function to handle user data instead of API call
+  const handleUserData = (userData: any) => {
+    console.log("User Data Received:", userData);
+    alert("User data processed successfully!");
+    // You can now pass this data to another component or store it in state
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // Convert string inputs to numbers
@@ -34,22 +41,8 @@ export default function UserDetails() {
       sessionDuration: numSessionDuration 
     };
 
-    try {
-      const response = await fetch("/api/saveUserData", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to save user data.");
-      }
-
-      alert("User data saved successfully!");
-    } catch (error) {
-      console.error("Error saving user data:", error);
-      alert("Something went wrong. Please try again.");
-    }
+    // Send data to the function instead of an API
+    handleUserData(userData);
   };
 
   return (
@@ -80,7 +73,6 @@ export default function UserDetails() {
               <option value="">Select</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
-              <option value="other">Other</option>
             </select>
           </div>
 
