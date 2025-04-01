@@ -24,7 +24,7 @@ export default function Signup() {
 
     try {
       await new Promise(resolve => setTimeout(resolve, 1500));
-      window.location.href = "/dashboard";
+      window.location.href = "/user_details";
     } catch (err) {
       setError("An error occurred. Please try again.");
     } finally {

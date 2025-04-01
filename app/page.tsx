@@ -18,7 +18,7 @@ export default function Home() {
             height={32}
             className="h-8 w-8"
           />
-          <span className="text-2xl font-bold tracking-tighter bg-gradient-to-r from-black to-gray-700 bg-clip-text text-transparent">
+          <span className="text-2xl px-1 font-bold tracking-tighter bg-gradient-to-r from-black to-gray-700 bg-clip-text text-transparent">
             HYPRFIT ©
           </span>
         </div>
