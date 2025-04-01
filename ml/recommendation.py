@@ -1,9 +1,9 @@
 import sys
 import pandas as pd
 import joblib
-
+file_path = "/home/fatedeath/fed_hackathon/hyprfit/ml/workout_recommender.joblib"
 # Load the trained model
-model = joblib.load('../ml-model/workout_recommender.joblib')
+model = joblib.load(file_path)
 
 def recommend_workout(args):
     input_data = pd.DataFrame({
