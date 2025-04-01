@@ -11,31 +11,41 @@ export default function UserDetails() {
   const [sessionDuration, setSessionDuration] = useState("");
 
   // Function to handle user data processing (and sending to ML model via API)
-  const handleUserData = async (userData: any) => {
-    try {
-      // Send data to the ML model via an API call
-      const response = await fetch("/api/ml-model", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
-
-      // Handle the API response
-      if (response.ok) {
-        const result = await response.json();
-        alert("ML Model Processed Successfully!");
-        console.log("ML Model Response:", result);
-        // You can handle the response data here (e.g., show recommendations, predictions, etc.)
-      } else {
-        throw new Error("Failed to send data to ML model.");
-      }
-    } catch (error) {
-      console.error("Error sending data to ML model:", error);
-      alert("Error processing data with the ML model.");
+ 
+type ApiResponse = {
+  recommended_workout: string;
+  probabilities: Record<string, number>; // A map of workout types to probabilities
+};
+const handleUserData = async (userData: any) => {
+  try {
+console.log(JSON.stringify(userData))
+    const response = await fetch('/api/ml-model', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(userData),
+    });
+ if (!response.ok) {
+      const errorDetails = await response.text(); // Log error details
+      console.error('API Error:', errorDetails);
+      throw new Error('Failed to get recommendation.');
     }
-  };
+    if (response.ok) {
+      const result: ApiResponse = await response.json(); // Use the defined type here
+      alert('Workout Recommendation: ' + result.recommended_workout);
+
+      // Save recommendation in localStorage or context for use on Dashboard
+      localStorage.setItem('workoutRecommendation', JSON.stringify(result));
+
+      // Redirect to dashboard
+      window.location.href = '/dashboard';
+    } else {
+      throw new Error('Failed to get recommendation.');
+    }
+  } catch (error) {
+    console.error(error);
+    alert('Error processing data.');
+  }
+};
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

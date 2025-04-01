@@ -3,9 +3,26 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+ type ApiResponse = {
+  recommended_workout: string;
+  probabilities: Record<string, number>;
+};
 
 export default function Dashboard() {
+
+
+const [recommendation, setRecommendation] = useState<ApiResponse | null>(null);
+
+  useEffect(() => {
+    // Retrieve recommendation from localStorage
+    const storedRecommendation = localStorage.getItem('workoutRecommendation');
+    if (storedRecommendation) {
+      setRecommendation(JSON.parse(storedRecommendation));
+    }
+  }, []);
+
   const workoutTypes = ["HIIT", "Strength", "Yoga", "Cardio"];
+
   const [currentWorkout, setCurrentWorkout] = useState(workoutTypes[0]);
 
   // State for workouts
@@ -93,9 +110,33 @@ export default function Dashboard() {
   };
 
   return (
+
     <div className="min-h-screen bg-gradient-to-br from-white via-gray-100 to-gray-200 text-gray-900">
       {/* Dashboard Section */}
       <section className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+  <div className="min-h-screen bg-gradient-to-br from-white via-gray-100 to-gray-200 text-gray-900">
+      <section className="max-w-7xl mx-auto px-6 py-12">
+        <h1 className="text-3xl font-bold mb-6">Your Dashboard</h1>
+
+        {recommendation ? (
+          <div className="bg-white p-6 rounded-xl shadow-md">
+            <h2 className="text-xl font-bold mb-4">Recommended Workout</h2>
+            <p className="text-lg">{recommendation.recommended_workout}</p>
+
+            <h3 className="mt-4 text-lg font-semibold">Workout Probabilities:</h3>
+            <ul>
+              {Object.entries(recommendation.probabilities).map(([workout, prob]) => (
+                <li key={workout}>
+                  {workout}: {(prob * 100).toFixed(2)}%
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <p>No recommendations available. Please fill out your details.</p>
+        )}
+      </section>
+    </div>
         
         {/* Current Workouts */}
         <div className="justify-center w-80 h-50 bg-black p-6 rounded-full flex items-center shadow-lg">
@@ -226,6 +267,7 @@ export default function Dashboard() {
           )}
         </div>
       </section>
+
     </div>
   );
 }
