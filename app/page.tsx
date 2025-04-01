@@ -73,8 +73,24 @@ export default function Home() {
             />
           </div>
         </div>
-
       </main>
+
+      {/* Why Should You Use HyprFit Section */}
+      <section className="bg-black text-white py-16 px-6">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-5xl font-bold mb-6">Who are we?</h2>
+          <p className="text-lg mb-8">
+            Welcome to HyprFit — your ultimate fitness tracker powered by cutting-edge ML technology.
+            Whether you’re aiming to lose weight, build muscle, boost endurance, or stay fit,
+            our platform adapts to your unique needs.
+          </p>
+          <p className="text-lg">
+            We believe fitness should be simple, motivating, and personalized.
+            That’s why HyprFit combines AI-driven recommendations with interactive progress tracking
+            to keep you on top of your journey. Join our community and start your transformation today with a free trial!
+          </p>
+        </div>
+      </section>
 
       <footer className="bg-[#222] border-t border-gray-200 py-12 px-6 text-white flex flex-col">
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 w-full">
@@ -111,9 +127,7 @@ export default function Home() {
           <div>
             <h3 className="text-2xl font-bold mb-4 tracking-tighter">MY ACCOUNT</h3>
             <div className="space-y-4">
-
               <Link href="/login" className="block hover:text-gray-300 transition">Log In</Link>
-
               <Link href="#" className="block hover:text-gray-300 transition">Contact Us</Link>
             </div>
           </div>
@@ -132,7 +146,7 @@ export default function Home() {
             <span className="font-bold text-lg">HYPRFIT ©</span>
           </div>
         </div>
-      </footer>      
+      </footer>
     </div>
   );
 }

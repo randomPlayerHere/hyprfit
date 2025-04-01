@@ -111,7 +111,7 @@ export default function Pricing() {
               )}
             </div>
             <a
-              href="/transaction"
+              href={`/transaction?plan=${billingCycle}`}
               className="mt-8 w-full block py-3 bg-black text-white font-medium rounded-lg hover:cursor-pointer hover:bg-gray-800 transition-colors text-center"
             >
               {billingCycle === 'yearly' ? 'Get Yearly Plan' : 'Get Monthly Plan'}
