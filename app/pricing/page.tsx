@@ -59,7 +59,7 @@ export default function Pricing() {
               <p className="mt-2 text-gray-500">No hidden charges</p>
             </div>
             <a 
-              href="/dashboard"
+              href="/signup"
               className="mt-8 w-full block py-3 border border-gray-300 rounded-lg text-gray-800 font-medium hover:cursor-pointer hover:bg-gray-50 transition-colors text-center"
             >
               Get Started
