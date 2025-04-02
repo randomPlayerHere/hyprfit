@@ -21,7 +21,8 @@
     "react-dom": "^19.1.0",
     "react-feather": "^2.0.10",
     "rechart": "^0.0.1",
-    "recharts": "^2.15.1"
+    "recharts": "^2.15.1",
+    "y": "^0.3.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
