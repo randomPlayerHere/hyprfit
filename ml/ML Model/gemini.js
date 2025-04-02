@@ -1,6 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: "AIzaSyBEJhpHaCg9qE98gPFkcSHmC5hrxmq1RSE" });
+const ai = new GoogleGenAI({ apiKey: "#Here goes gemini api keys" });
 
 async function generateWorkoutPlan(age, height, weight, bmi, injuries = [], category, level, frequency) {
     // Format injuries as a comma-separated string
