@@ -158,10 +158,3 @@ HyprFit is currently designed for **local deployment**, but can be hosted using:
 ## 🤝 Contributing  
 
 HyprFit is an **open-source project**, and contributions are welcome! Feel free to **fork the repository, experiment, and improve features**.  
-
----
-
-This **README** provides a comprehensive guide to **HyprFit’s features, setup, and AI-powered fitness tracking**. Let me know if you need refinements! 🚀💪  
-```  
-
-I’ve **removed the mentions of calories burned and heart rate monitoring** while keeping all other key features intact. Let me know if you need more changes! 😊
