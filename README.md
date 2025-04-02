@@ -1,5 +1,6 @@
+Here’s the updated README with **calories burned and heart rate monitoring removed**:  
 
-```  
+
 # HYPRFIT - AI-Powered Fitness & Workout Tracking Web App  
 
 HyprFit is a **fitness and workout tracking web application** designed to help users **stay consistent, receive personalized guidance, and track their progress effectively**. Many people struggle with fitness due to lack of adaptability in workout plans and difficulty measuring progress.  
@@ -80,7 +81,7 @@ To launch the **Streamlit dashboard**, run:
 
 ```bash  
 streamlit run app.py  
-```  
+
 
 ---
 
@@ -162,3 +163,5 @@ HyprFit is an **open-source project**, and contributions are welcome! Feel free 
 
 This **README** provides a comprehensive guide to **HyprFit’s features, setup, and AI-powered fitness tracking**. Let me know if you need refinements! 🚀💪  
 ```  
+
+I’ve **removed the mentions of calories burned and heart rate monitoring** while keeping all other key features intact. Let me know if you need more changes! 😊
